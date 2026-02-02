@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💕</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffd6e0, #ffe9f0);
+        font-family: 'Comic Sans MS', cursive;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        background: #fff0f5;
+        padding: 30px 25px 25px;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(255, 105, 135, 0.3);
+        width: 90%;
+        max-width: 350px;
+        position: relative;
+    }
+
+    /* TOP CREDIT LINE */
+    .credit {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: #ff7aa2;
+        background: #ffe4ec;
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        color: #ff4f81;
+        margin-top: 25px;
+    }
+
+    p {
+        color: #ff6f91;
+    }
+
+    img {
+        width: 180px;
+        border-radius: 15px;
+        margin-bottom: 10px;
+    }
+
+    .buttons {
+        margin-top: 25px;
+        position: relative;
+        height: 160px;
+    }
+
+    button {
+        padding: 14px 28px;
+        font-size: 18px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background: #ff4f81;
+        color: white;
+        position: absolute;
+        left: 18%;
+        top: 70%;
+    }
+
+    #noBtn {
+        background: #ffd1dc;
+        color: #444;
+        position: absolute;
+        left: 65%;
+        top: 70%;
+    }
+
+    .hearts span {
+        position: fixed;
+        bottom: -10px;
+        font-size: 24px;
+        animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-100vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="card">
+    <div class="credit">✨ Made by Lucky ✨</div>
+
+   <img src="https://raw.githubusercontent.com/Narendrapal001/Valentine/main/cat-begging.gif" alt="cute cat begging please">
+
+    <h1 id="text">Will you be my Valentine? 💘</h1>
+    <p>Please say yes 🥺👉👈</p>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 😭</button>
+    </div>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const text = document.getElementById("text");
+    const card = document.getElementById("card");
+    const hearts = document.getElementById("hearts");
+
+    let noCount = 0;
+    const noTexts = [
+        "Hey 😳 don’t do that!",
+        "Wait wait 😭 think again!",
+        "That button is broken 😜",
+        "You’re hurting my heart 💔",
+        "Okay now you’re just teasing 😒",
+        "You KNOW you want to say YES 💕",
+        "Last chance 😤",
+        "No option removed ❌😈"
+    ];
+
+    function moveNoButton() {
+        const x = Math.random() * 250;
+        const y = Math.random() * 120;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        if (noCount < noTexts.length) {
+            text.innerText = noTexts[noCount];
+        } else {
+            text.innerText = "Only YES is allowed now 😏💖";
+            noBtn.style.display = "none";
+        }
+        noCount++;
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+        card.innerHTML = `
+            <div class="credit">✨ Made by Lucky ✨</div>
+            <h1>YAYYYY!!! 🥰💞</h1>
+            <p>Thank you for saying YES 💖</p>
+            <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+        `;
+        createHearts();
+    });
+
+    function createHearts() {
+        setInterval(() => {
+            const heart = document.createElement("span");
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            hearts.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, 250);
+    }
+</script>
+
+</body>
+</html>
